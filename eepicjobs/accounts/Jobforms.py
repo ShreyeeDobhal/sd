@@ -9,7 +9,7 @@ class JobPostform(forms.ModelForm):
     JobTitle=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Job Title'}))
     JobDesciption=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Job Description'}))
     CompanyName=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Comapany Name'}))
-    
+    #phone
     email = forms.EmailField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}))
     country = CountryField().formfield()
     jobType=forms.ChoiceField(label=('What Type of Job are you Looking for?'), 
