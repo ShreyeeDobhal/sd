@@ -5,6 +5,9 @@ from  accounts.models import Jobpost
 #from accounts import Jobforms
 from accounts.Jobforms import JobPostform
 from .models import *
+from json import dumps 
+import json
+from django.core import serializers
 from datetime import date
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse, StreamingHttpResponse, HttpResponseServerError
@@ -282,9 +285,22 @@ def searchjobb(request):
         if srch:
             match=Jobpost.objects.filter(Q(JobTitle__icontains=srch) | Q(JobDesciption__icontains=srch) | Q(jobType__iexact=srch))
             if(match.exists()):
-                return render(request,'demo.html',{'sr':match})
+                return render(request,'index.html',{'sr':match})
             else:
                 messages.error(request,"Sorry! No results found.")
         else:
             return HttpResponseRedirect("/searchJob/")
-    return render(request,'demo.html')
+    return render(request,'index.html')
+
+
+    
+def searchindustry(request):
+    match=Jobpost.objects.filter(Q(Jobindustry__icontains="automotive"))
+    if(match.exists()):
+        #dataJSON = dumps(match) 
+        dataJSON = serializers.serialize("json",match)
+        tmpObj = json.loads(dataJSON)
+        return render(request, 'automation.html', {'sr':dataJSON}) 
+        #return HttpResponse(json.dumps(tmpObj))
+    else:
+        messages.error(request,"Sorry! No results found.")

@@ -15,6 +15,7 @@ urlpatterns = [
                 path('home/jobpost/', views.jobpost_create, name='jobpost'),
                 path('viewmsg/', views.viewmsg, name='viewmsg'),
                 path('search/', views.searchjob, name='search'),
+                path('auto/', views.searchindustry, name='auto'),
                 path('searchJob/', views.searchjobb, name='searchJob'),
                 
 ]

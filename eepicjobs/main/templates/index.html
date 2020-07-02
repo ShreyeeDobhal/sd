@@ -11,12 +11,45 @@
                     <hr />
                     <div class="clearfix"></div>
                     <p>Search from 1500+ Jobs</p><p>
-                    <form method="get" action="#SearchURL">
-                                    
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="job-title" placeholder="Search here"/>
+                        <form method="POST" action="/search/">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" name="srh" class='form-control' placeholder='Enter the job post '>
                             <button type="submit"><i class="ti-search"></i> </button>
                         </div>
+                        <div>
+                            {% if messages %}
+                            <ul class="messages">
+                                {% for k in messages %}
+                                <li style="color:blueviolet">{{k}}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div><br>
+                        <div style="color: crimson">
+                            {% if sr %}
+                            {% for k in sr %}
+                            <table border="5px" width="350px">
+                                <tr>
+                                    <td>Job Title</td>
+                                    <td>{{k.JobTitle}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Job Desciption</td>
+                                    <td>{{k.JobDesciption}}</td>
+                                </tr>
+                                <tr>
+                                    <td>CompanyName </td>
+                                    <td>{{k.CompanyName }}</td>
+                                </tr>
+                                <tr>
+                        
+                            </table>
+                            <hr>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
                     </form>
                     <div class="categories-icons">
                         <div class="featured-cat owl-carousel owl-theme">

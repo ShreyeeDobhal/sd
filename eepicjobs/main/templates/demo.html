@@ -159,9 +159,16 @@ window.a2a_config=window.a2a_config||{};a2a_config.callbacks=[];a2a_config.overl
                                 <div class="categories-icons">
                                     <div class="featured-cat owl-carousel owl-theme">
                                     <div class="item">
-                                            <a href="../search-page/indexd8fa.html?cat-id=80">
+                                            <a href="../search-page/indexd8fa.html?cat-id=80"></a>
                                                 <img src="../wp-content/uploads/2019/05/settings.png" alt="image"/>
                                                 <h4>Automotive</h4>
+                                                <button onclick="filter()">click me</button>
+                                                <p id="Automotive"></p>
+                                                <script>
+                                                    function filter() {
+                                                      document.getElementById("Automotive").innerHTML = "welcome to automotive industry";
+                                                      
+                                                    }
                                             </a>
                                         </div><div class="item">
                                             <a href="../search-page/index313f.html?cat-id=8">

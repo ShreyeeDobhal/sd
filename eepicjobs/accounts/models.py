@@ -163,7 +163,7 @@ class Jobpost(models.Model):
     JobTitle=models.CharField(max_length=250)
     JobDesciption=models.TextField()
     CompanyName=models.CharField(max_length=250)
-    
+    Jobindustry=models.CharField(max_length=250,null=True)
     email = models.EmailField(validators=[validators.EmailValidator], null=True)
     phone_number = models.CharField(validators=[phone_regex], max_length=17, null=True)
     contractchoices=(('0',"Contract"),('1',"Internship"),('2',"Temporary"),('3',"Walk-In"),('4',"Fresher"))
@@ -182,7 +182,7 @@ class Jobpost(models.Model):
         verbose_name_plural = 'Jobposts'
 
     def __str__(self):
-        return "{} - {}".format(str(self.id), self.JobTitle)
+        return "{} - {}".format(str(self.id), self.JobTitle,self.Jobindustry,self.jobType,self.JobDesciption,self.CompanyName)
     
     
 
