@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect, get_list_or_404, get_object_or_40
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from  accounts.models import Jobpost
+from  accounts.models import UserProfile
 #from accounts import Jobforms
 from accounts.Jobforms import JobPostform
+from accounts.resume import UserProfileForm
 from .models import *
 from json import dumps 
 import json
@@ -304,3 +306,47 @@ def searchindustry(request):
         #return HttpResponse(json.dumps(tmpObj))
     else:
         messages.error(request,"Sorry! No results found.")
+
+
+
+def createresume(request):
+    form=UserProfileForm(request.POST or None,request.FILES or None)
+    if form.is_valid():
+        instance=form.save(commit=False)
+        instance.user=request.user
+        instance.save()
+        #message of success
+        messages.success(request,"Successfully created")
+        return redirect('home')
+    context = {
+        "form": form,}
+    return render(request, 'resume.html',context)
+
+  
+
+    
+
+
+
+
+def updateresume(request,pk):
+    up=UserProfile.objects.get(id=pk)
+    form=UserProfileForm(instance=up)
+    if(request.method=='POST'):
+        form=UserProfileForm(request.POST,instance=up)
+        if form.is_valid():  
+                form.save()
+                return redirect('/') 
+    context={'form':form}
+    return render(request,'resume.html',context)  
+
+
+
+def show(request):  
+    employees = UserProfile.objects.all()  
+    return render(request,"show.html",{'employees':employees})  
+                    
+def destroy(request, id):  
+    employee = Employee.objects.get(id=id)  
+    employee.delete()  
+    return redirect("/show")  

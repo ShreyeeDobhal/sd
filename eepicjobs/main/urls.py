@@ -17,5 +17,8 @@ urlpatterns = [
                 path('search/', views.searchjob, name='search'),
                 path('auto/', views.searchindustry, name='auto'),
                 path('searchJob/', views.searchjobb, name='searchJob'),
+                path('createresume/', views.createresume, name='createresume'),
+                path('show/', views.show, name='show'),
+                path('updateresume/<str:pk>/', views.updateresume, name='updateresume'),
                 
 ]

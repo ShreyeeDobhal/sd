@@ -27,6 +27,16 @@ class UserProfile(models.Model):
     is_emp = models.BooleanField(default=False)
     is_seek = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
+    email =  models.EmailField(validators=[validators.EmailValidator], null=True)
+    skills=models.CharField(max_length=255, null=True, help_text="Mention Your Skils")
+    experience= models.CharField(max_length=255, null=True, verbose_name='experience')
+    address= models.CharField(max_length=255, null=True, verbose_name='address')
+    prev_Employments= models.CharField(max_length=255, null=True, help_text="Mention Your Previous employments")
+    education_details= models.CharField(max_length=255, null=True, verbose_name='Mention Your Education Details')
+    projects= models.CharField(max_length=255, null=True, verbose_name='Give a beief about your projects')
+    accomplishments= models.CharField(max_length=255, null=True, verbose_name='accomplishments')
+    otherLinks=models.URLField(blank=True, null=True)
+
 
     class Meta:
         verbose_name = 'User Profile'
