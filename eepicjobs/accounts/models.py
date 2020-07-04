@@ -197,7 +197,7 @@ class Jobpost(models.Model):
     
 class applicant(models.Model):
         user=models.ForeignKey(UserProfile,on_delete=models.CASCADE)
-        job=models.ForeignKey(Jobpost,on_delete=models.CASCADE)
+        job=models.ForeignKey(Jobpost,on_delete=models.CASCADE,default=0)
         
         email = models.EmailField(validators=[validators.EmailValidator], null=True)
         
