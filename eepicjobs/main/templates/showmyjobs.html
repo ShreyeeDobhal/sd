@@ -40,49 +40,18 @@
 
 </div><br>
 <div style="color: crimson">
-    {% for k in employees %}
+    {% for k in jobdisplay %}
     <table border="5px" width="350px">
+        <tr>
+            <td>Job Title</td>
+            <td>{{k.JobTitle}}</td>
+        </tr>
 
         <tr>
-            <td>Phone number</td>
-            <td>{{k.phone_number}}</td>
-        </tr>
-        <tr>
-            <td>Skills </td>
-            <td>{{k.skills }}</td>
-        </tr>
-        <tr>
-            <td>Previous Employments</td>
-            <td>{{k.prev_Employments}}</td>
-        </tr>
-        <tr>
-            <td>Accomplishments</td>
-            <td>{{k.accomplishments}}</td>
-        </tr>
-        <tr>
-            <td>Experience</td>
-            <td>{{k.experience}}</td>
-        </tr>
-        <tr>
-            <td>Address</td>
-            <td>{{k.address}}</td>
-        </tr>
-        <tr>
-            <td>Projects</td>
-            <td>{{k.projects}}</td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td>{{k.email}}</td>
-        </tr>
-        <tr>
-            <td>Education_details</td>
-            <td>{{k.education_details}}</td>
+            <td>Job Details</td>
+            <td>{{k.JobDesciption}}</td>
         </tr>
         
-
-    </table>
-    <hr>
     {% endfor %}
 
 </div>

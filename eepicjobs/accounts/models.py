@@ -195,6 +195,41 @@ class Jobpost(models.Model):
         return "{} - {}".format(str(self.id), self.JobTitle,self.Jobindustry,self.jobType,self.JobDesciption,self.CompanyName)
     
     
+class applicant(models.Model):
+        user=models.ForeignKey(UserProfile,on_delete=models.CASCADE)
+        job=models.ForeignKey(Jobpost,on_delete=models.CASCADE)
+        
+        email = models.EmailField(validators=[validators.EmailValidator], null=True)
+        
+        phone_number = models.CharField(validators=[phone_regex], max_length=17, null=True)
+        is_emp = models.BooleanField(default=False)
+        is_seek = models.BooleanField(default=False)
+       
+        skills=models.CharField(max_length=255, null=True, help_text="Mention Your Skils")
+        experience= models.CharField(max_length=255, null=True, verbose_name='experience')
+        address= models.CharField(max_length=255, null=True, verbose_name='address')
+        prev_Employments= models.CharField(max_length=255, null=True, help_text="Mention Your Previous employments")
+        education_details= models.CharField(max_length=255, null=True, verbose_name='Mention Your Education Details')
+        projects= models.CharField(max_length=255, null=True, verbose_name='Give a beief about your projects')
+        accomplishments= models.CharField(max_length=255, null=True, verbose_name='accomplishments')
+        otherLinks=models.URLField(blank=True, null=True)
+        
+
+        class Meta:
+            verbose_name = 'applicant'
+            verbose_name_plural = 'applicants'
+
+        def __str__(self):
+            return "{} - {}".format(str(self.id), self.email,self.job)
+        
+
+
+
+
+
+
+
+
 
 # *****************************************************************************************************************
 # *************** SIGNALS AND RECEIVERS  **************************************************************************

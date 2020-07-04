@@ -3,8 +3,9 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from  accounts.models import Jobpost
 from  accounts.models import UserProfile
-#from accounts import Jobforms
+from accounts.models import applicant
 from accounts.Jobforms import JobPostform
+from accounts.applyjob import applicantform
 from accounts.resume import UserProfileForm
 from .models import *
 from json import dumps 
@@ -20,6 +21,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 import os
 import json
+from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 import uuid
 import time
@@ -346,7 +348,22 @@ def show(request):
     employees = UserProfile.objects.all()  
     return render(request,"show.html",{'employees':employees})  
                     
-def destroy(request, id):  
-    employee = Employee.objects.get(id=id)  
-    employee.delete()  
-    return redirect("/show")  
+
+def applyjob(request):
+    form=applicantform(request.POST or None,request.FILES or None)
+    if form.is_valid():
+        instance=form.save(commit=False)
+        instance.user=request.user
+        instance.save()
+        #message of success
+        messages.success(request,"Successfully created")
+        return redirect('home')
+    #form= JobPostform()
+    context = {
+        "form": form,}
+    return render(request, 'applyjob.html',context)
+
+def showmyjobs(request):
+    jobdisplay=Jobpost.objects.filter(user=request.user.userprofile)
+    return render(request,'showmyjobs.html',{'jobdisplay':jobdisplay})
+    
