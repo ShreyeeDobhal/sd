@@ -18,10 +18,11 @@ urlpatterns = [
                 path('auto/', views.searchindustry, name='auto'),
                 path('searchJob/', views.searchjobb, name='searchJob'),
                 path('createresume/', views.createresume, name='createresume'),
-                path('show/', views.show, name='show'),
-                path('applyjob/', views.applyjob, name='applyjob'),
+                path('showresume/', views.showresume, name='showresume'),
+                path('applyjob/<jid>', views.applyjob, name='applyjob'),
                 path('showmyjobs/', views.showmyjobs, name='showmyjobs'),
                 path('home/applyjob/', views.applyjob, name='applyjob'),
                 path('updateresume/<str:pk>/', views.updateresume, name='updateresume'),
-                
+                path('showapplied/', views.showapplied, name='showapplied'),
+                path('rr/', views.rr, name='rr'),
 ]

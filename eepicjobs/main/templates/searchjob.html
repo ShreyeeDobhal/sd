@@ -32,6 +32,27 @@
                 </label>
             </div>
 </form><br><br>
+
+
+    <div class="heading-area">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                <h4>Available Jobs ({{sr.count}})</h4>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                <form method="GET" id="job_order_search">
+                                    <select class="js-example-basic-single form-control change_order" data-allow-clear="true" data-placeholder="Select Option" style="width: 100%" name="order_job">
+                                        <option value="" >Select Option</option>
+                                        <option value="ASC" >Ascending</option>
+                                    <option value="DESC" selected>Descending </option>
+                                    </select>
+                                                                </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+
 <div>
     {% if messages %}
     <ul class="messages">
@@ -59,13 +80,7 @@
         </tr>
         <tr>
             <td>Click To apply </td>
-            <td><button id="myButton" class="float-left submit-button" >Apply now</button>
-
-                <script type="text/javascript">
-                    document.getElementById("myButton").onclick = function () {
-                        location.href = "/home/applyjob/";
-                    };
-                </script></td>
+            <td> <a href="{% url 'applyjob' k.id %}"> <button id="myButton" class="btn n-btn-rounded btn-mid btn-clear external_apply" >Apply now</button> </a></td>
         </tr>
         
 

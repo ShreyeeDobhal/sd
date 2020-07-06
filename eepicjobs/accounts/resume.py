@@ -9,7 +9,6 @@ class UserProfileForm(forms.ModelForm):
 
     email = forms.EmailField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}))
     is_emp =forms.BooleanField()
-    is_seeker=forms.BooleanField()
     skills=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Skills'}))
 
     experience =forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Experience'}))
@@ -27,9 +26,20 @@ class UserProfileForm(forms.ModelForm):
         fields = (
         'email' ,
         'phone_number','address','education_details', 'is_emp',
-        'prev_Employments','skills','projects','accomplishments','experience','otherLinks')
-        
-        
+        'prev_Employments','skills','projects','accomplishments','experience','profile_photo','hobbies',
+
+        'school',
+        'college',
+        'tenth_percentage',
+        'yop_for_tenth',
+        'twelth_percentage',
+        'yop_for_twelfth',
+        'bachelor_degree',
+        'yop_for_bachelors',
+        'CGPA_For_bachelors',
+        'masters_degree',
+        'yop_for_masters',
+        'CGPA_For_masters', )
         
         
                

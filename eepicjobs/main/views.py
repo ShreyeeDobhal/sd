@@ -105,8 +105,8 @@ def register(request):
                         auth_login(request, user)
                         profile = UserProfile()
                         profile.user = user
-                        if request.FILES['pic']:
-                            profile.profile_photo=request.FILES['pic']
+                        #if request.FILES['pic']:
+                         #   profile.profile_photo=request.FILES['pic']
                         try:
                             profile.phone_number = phone_number
                         except:
@@ -260,7 +260,7 @@ def jobpost_create(request):
     form=JobPostform(request.POST or None,request.FILES or None)
     if form.is_valid():
         instance=form.save(commit=False)
-        instance.user=request.user
+        instance.user=request.user.userprofile
         instance.save()
         #message of success
         messages.success(request,"Successfully created")
@@ -312,17 +312,24 @@ def searchindustry(request):
 
 
 def createresume(request):
-    form=UserProfileForm(request.POST or None,request.FILES or None)
-    if form.is_valid():
-        instance=form.save(commit=False)
-        instance.user=request.user
-        instance.save()
-        #message of success
-        messages.success(request,"Successfully created")
-        return redirect('home')
+    try:
+        profile = request.user.userprofile
+    except UserProfile.DoesNotExist:
+        profile = UserProfile(user=request.user)
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully created")
+            return redirect('home')
+    else:
+        form = UserProfileForm(instance=profile)
+
     context = {
         "form": form,}
     return render(request, 'resume.html',context)
+
 
   
 
@@ -344,26 +351,42 @@ def updateresume(request,pk):
 
 
 
-def show(request):  
-    employees = UserProfile.objects.all()  
+def showresume(request):
+    employees = UserProfile.objects.filter(user=request.user.userprofile)
     return render(request,"show.html",{'employees':employees})  
                     
 
-def applyjob(request):
+def applyjob(request, jid):
     form=applicantform(request.POST or None,request.FILES or None)
     if form.is_valid():
         instance=form.save(commit=False)
-        instance.user=request.user
+        instance.user=request.user.userprofile
         instance.save()
         #message of success
         messages.success(request,"Successfully created")
         return redirect('home')
     #form= JobPostform()
+    job = Jobpost.objects.get(id=jid)
     context = {
-        "form": form,}
+        "form": form,
+        "job": job,}
     return render(request, 'applyjob.html',context)
 
 def showmyjobs(request):
     jobdisplay=Jobpost.objects.filter(user=request.user.userprofile)
     return render(request,'showmyjobs.html',{'jobdisplay':jobdisplay})
-    
+
+
+def showapplied(request):
+    applydisplay=applicant.objects.filter(user=request.user.userprofile)
+    return render(request,'showapplied.html',{'applydisplay':applydisplay})
+
+def resumebuilder(request):
+    return redirect('resumebuilder.html')
+
+def rr(request):
+    ress = UserProfile.objects.filter(user=request.user.userprofile)
+    return render(request, 'resumebuilder.html', {'ress':ress})
+
+
+

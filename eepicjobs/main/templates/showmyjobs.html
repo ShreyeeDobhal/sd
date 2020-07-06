@@ -33,13 +33,6 @@
             </div>
 </form><br><br>
 <div>
-    
-        {% for k in messages %}
-        <li style="color:blueviolet">{{k}}</li>
-        {% endfor %}
-
-</div><br>
-<div style="color: crimson">
     {% for k in jobdisplay %}
     <table border="5px" width="350px">
         <tr>
@@ -51,8 +44,9 @@
             <td>Job Details</td>
             <td>{{k.JobDesciption}}</td>
         </tr>
-        
+
     {% endfor %}
+
 
 </div>
                 </div>
