@@ -385,7 +385,7 @@ def resumebuilder(request):
     return redirect('resumebuilder.html')
 
 def rr(request):
-    ress = UserProfile.objects.filter(user=request.user.userprofile)
+    ress = UserProfile.objects.filter(user=request.user)
     return render(request, 'resumebuilder.html', {'ress':ress})
 
 
